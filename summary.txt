@@ -1,0 +1,28 @@
+(1) How do you approach problems? Please take some time after your implementation is complete to summarize your process, design approach.
+
+The approached the problem in following steps:
+-checking each column as date type or not
+-Checking if its date format using regex pattern, then extract the date from string and converting into a date, month, year format
+-filter the records based on given min and max dates
+-lowercase the columns according to the mapping JSON file
+-finally, I developed a framework using cherryPy and exposed this as a service where it can run for given data and given a mapping JSON file
+
+
+(2) How do you design for data? UDRC data lives in multiple formats throughout its lifetime, from .csv to database tables in BigQuery, Oracle and/or PostgreSQL. We hope you will demonstrate effective, efficient, loading of data (pretend the dataset is very large.
+
+The framework developed in previous service can handle very large files as we are making the data into chunks and processing them quickly and Here, I am using regex to handle the noise and we are hosting this service in the whole docker so that it can deploy quickly irrespective of any OS.
+
+(3) How well can you communicate modules for testing? We will be running your code, so please provide clear instructions on environment requirements and any needed make files if necessary. DO NOT SEND A BINARY FILE.
+
+Instructions for installing modules:
+•	install all packages which is present in requirements.txt using below command
+•	pip install -r requirements.txt
+•	place all input csv files and mapping files inside the resources folder and update configs in app.config
+•	please run below commands :
+o	sudo docker build -t date:1.1
+o	sudo docker run --host=0.0.0.0 date:1.1
+o	check wheather service is up or not using below command
+o	sudo docker ps -a  | grep "date:1.1"
+o	hit the endpoint http://0.0.0.0:8080/SendData
+o	output file would be stored in the project directory as "output_file.csv"
+
